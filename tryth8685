@@ -1,0 +1,31 @@
+import requests
+
+# Google Translate API endpoint
+url = "https://translate.google.com/translate_a/single"
+
+# URL of the page to be translated
+page_url = "https://www.example.com"
+
+# Target language to translate to
+target_lang = "zh-CN" # Chinese Simplified
+
+# Headers for the GET request
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"
+}
+
+# Parameters for the GET request
+params = {
+    "client": "gtx",
+    "sl": "auto",
+    "tl": target_lang,
+    "dt": "t",
+    "q": requests.get(page_url).text
+}
+
+# Make the GET request
+response = requests.get(url, headers=headers, params=params)
+
+# Print the translated text
+print(response.json()[0][0][0])
+
